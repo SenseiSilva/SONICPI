@@ -2,9 +2,9 @@ use_bpm 60
 use_synth :piano
 
 
-x = 0
+x = 21
 
-128.times do
+87.times do
   play x
   sleep 0.25
   x = x+1
