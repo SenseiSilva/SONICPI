@@ -1,11 +1,12 @@
 use_bpm 120
 
+
 # this is just an intro to the song to give it a dark ambiance
 6.times do
-
+  
   sample :ambi_glass_hum, amp: 30, rate: 0.3, pan: -1, release: 2
   sleep 1
-
+  
   sample :ambi_glass_hum, amp: 30, rate: 0.4, pan: 1, release: 2
   sleep 1
 end
@@ -23,41 +24,41 @@ end
 in_thread do
   use_synth :blade
   loop do
-
+    
     play 30, amp: 2, release: 3
     sleep 4
   end
 end
 
-1.times do
-
+2.times do
+  
   use_synth :tb303
   32.times do
     n = (ring :e1, :e2, :e3, :e4).tick
     play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0
     sleep 0.25
   end
-
+  
   use_synth :tb303
   16.times do
     n = (ring :d1, :d2, :d3, :d4).tick
     play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 2
     sleep 0.25
   end
-
+  
   use_synth :tb303
   12.times do
     n = (ring :c1, :c2, :c3, :c4).tick
     play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
     sleep 0.25
   end
-
+  
   4.times do
     n = (ring :d4, :b4, :c4, :e4).tick
     play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0
     sleep 0.25
   end
-
+  
 end
 
 live_loop :deep do
