@@ -1,0 +1,41 @@
+live_loop :main do
+  #ticks/goes through the notes in different octives 
+  use_synth :tb303
+  32.times do
+    n = (ring :e1, :e2, :e3, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+    #uses quater notes for all the main loop
+  end
+  
+  use_synth :tb303
+  16.times do
+    n = (ring :d1, :d2, :d3, :d4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  use_synth :tb303
+  12.times do
+    n = (ring :c1, :c2, :c3, :c4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  #ticks/goes through all the notes used in the same octive
+  4.times do
+    n = (ring :d4, :b4, :c4, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  # equal to 64 beats overall in the whole loop
+end
+
+# simple kick and snare drum beat to counter balance the fastness of the main loop
+live_loop :drums do
+  sample :elec_soft_kick, amp: 5
+  sleep 1
+  
+  sample :elec_mid_snare, amp: 5
+  sleep 1
+end
