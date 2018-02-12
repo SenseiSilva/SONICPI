@@ -2,16 +2,20 @@
 # SHEET MUSIC - THE SONG IS NOT A REMIX OF AN ACTUAL SONG
 # BPM - USED AS A STANDARD BPM FOR SONGS WITH A FAST BEAT
 
+
 use_bpm 120
 
+a = :elec_soft_kick
+b = :elec_mid_snare
+h = :ambi_glass_hum
 
 # this is just an intro to the song to give it a dark ambiance
 6.times do
   
-  sample :ambi_glass_hum, amp: 30, rate: 0.3, pan: -1, release: 2
+  sample h, amp: 30, rate: 0.3, pan: -1, release: 2
   sleep 1
   
-  sample :ambi_glass_hum, amp: 30, rate: 0.4, pan: 1, release: 2
+  sample h, amp: 30, rate: 0.4, pan: 1, release: 2
   sleep 1
 end
 
@@ -34,8 +38,6 @@ in_thread do
   end
 end
 
-# MAIN LOOP PLAYS 2 TIMES TO ALLOW FOR A "DROP"
-# THE DRUMS DONT COME IN UNTIL THE HUM COMES OFF AND THE MAIN LOOP CYCLES 2 TIMES
 2.times do
   
   use_synth :tb303
@@ -109,9 +111,9 @@ end
 
 
 live_loop :drums do
-  sample :elec_soft_kick, amp: 5
+  sample a, amp: 5
   sleep 1
   
-  sample :elec_mid_snare, amp: 5
+  sample b, amp: 5
   sleep 1
 end
