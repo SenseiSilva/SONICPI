@@ -1,0 +1,34 @@
+# Stranger Things Main Theme
+# NOTE: Each measure's total sleep adds up to 4 because the time signature is 4/4
+use_bpm 160
+use_synth :saw
+
+
+use_synth :piano
+notes = [:c2, :e2, :g2, :b2, :c3, :b2, :g2, :e2] # an array is a list of values
+x = 0
+
+
+live_loop :stranger_theme do
+  with_fx :distortion do
+    8.times do
+      play notes[x]
+      sleep 0.5
+      x = x + 1
+    end
+    # You have to set x back to 0 to restart the array after going through the index
+    x=0
+  
+  end
+end
+
+
+
+live_loop :drums do
+  sample :bd_808, amp: 100
+  sleep 3.5
+  sample :bd_808, amp: 100, sustain: 0.25
+  sleep 0.5
+  sample :bd_808, amp: 100
+  sleep 2
+end
