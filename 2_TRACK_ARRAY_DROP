@@ -1,0 +1,137 @@
+use_bpm 120
+
+a = :elec_soft_kick
+b = :elec_mid_snare
+h = :ambi_glass_hum
+
+notes = [:e1, :e2, :e3, :e4] # an array is a list of values
+x = 0
+
+# this is just an intro to the song to give it a dark ambiance
+6.times do
+  
+  sample h, amp: 30, rate: 0.3, pan: -1, release: 2
+  sleep 1
+  
+  sample h, amp: 30, rate: 0.4, pan: 1, release: 2
+  sleep 1
+end
+
+
+sample :ambi_drone
+sleep 2
+
+use_synth :blade
+
+2.times do
+  play 30, amp: 5, release: 4
+  sleep 4
+end
+
+in_thread do
+  use_synth :blade
+  loop do
+    
+    play 30, amp: 2, release: 3
+    sleep 4
+  end
+end
+
+2.times do
+  
+  use_synth :tb303
+  use_synth_defaults
+  32.times do
+    n = (ring :e1, :e2, :e3, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0
+    sleep 0.25
+  end
+  
+  use_synth :tb303
+  16.times do
+    n = (ring :d1, :d2, :d3, :d4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 2
+    sleep 0.25
+  end
+  
+  use_synth :tb303
+  12.times do
+    n = (ring :c1, :c2, :c3, :c4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  4.times do
+    n = (ring :d4, :b4, :c4, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0
+    sleep 0.25
+  end
+  
+end
+
+live_loop :deep do
+  use_synth :blade
+  loop do
+    
+    play 30, amp: 3, release: 3
+    sleep 8
+  end
+end
+
+live_loop :main do
+  
+  use_synth :tb303
+  32.times do
+    n = (ring :e1, :e2, :e3, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  use_synth :tb303
+  16.times do
+    n = (ring :d1, :d2, :d3, :d4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  use_synth :tb303
+  12.times do
+    n = (ring :c1, :c2, :c3, :c4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+  4.times do
+    n = (ring :d4, :b4, :c4, :e4).tick
+    play n, release: 0.125, cutoff: 100, res: 0.8, wave: 0, amp: 3
+    sleep 0.25
+  end
+  
+end
+
+
+live_loop :drums do
+  sample a, amp: 5
+  sleep 1
+  
+  sample b, amp: 5
+  sleep 1
+end
+
+use_synth :tb303
+# Making the release longer to stay in pocket
+use_synth_defaults release: 3.5
+# this will play in the background to add onto the main loop
+live_loop :background do
+  
+  4.times do
+    play notes[x]
+    sleep 4
+    x = x + 1
+  end
+  # You have to set x back to 0 to restart the array after going through the index
+  x=0
+end
+
+
+# Welcome to Sonic Pi v3.0.1
