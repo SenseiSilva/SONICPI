@@ -4,7 +4,9 @@ a = :elec_soft_kick
 b = :elec_mid_snare
 h = :ambi_glass_hum
 
+# Notes get higher and higher every 2 seconds
 notes = [:e1, :e2, :e3, :e4] # an array is a list of values
+# Array starts at the value 0 and goes up to 3
 x = 0
 
 # this is just an intro to the song to give it a dark ambiance
