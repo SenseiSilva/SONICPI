@@ -1,0 +1,26 @@
+
+use_synth :saw
+use_bpm 120
+# I am naming this function as strange, with a parameter on the notes
+# The paramter's name is yo_momma 
+
+define :strange do |yo_momma|
+  1.times do
+    play yo_momma, release: 1
+    sleep 0.5
+  end
+end
+
+#Each note is different which is why there is a paramter on only the note
+#This is in a live loop to keep it on an infinte loop
+
+live_loop :stranger do
+  strange :c2
+  strange :e2
+  strange :g2
+  strange :b2
+  strange :c3
+  strange :b2
+  strange :g2
+  strange :e2
+end
