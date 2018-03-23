@@ -1,0 +1,40 @@
+define :intro_build do |m, g|
+  sample h, amp: 2, rate: m, pan: -1, release: g
+  sleep 1
+  
+  sample h, amp: 2, rate: m, pan: 1, release: g
+  sleep 1
+end
+
+define :background do
+  use_synth :blade
+  loop do
+    
+    play 30, amp: 3, release: 3
+    sleep 8
+  end
+end
+
+6.times do
+  intro_build 0.3, 2
+end
+
+
+sample :ambi_drone
+sleep 2
+
+use_synth :blade
+
+2.times do
+  play 30, amp: 2, release: 4
+  sleep 4
+end
+
+in_thread do
+  use_synth :blade
+  loop do
+    
+    play 30, amp: 2, release: 3
+    sleep 4
+  end
+end
