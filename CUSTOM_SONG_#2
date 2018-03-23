@@ -1,0 +1,116 @@
+# Welcome to Sonic Pi v3.0.1
+use_bpm 120
+
+# this array is used for background melody
+notes2 = [:e2, :g2, :a2, :e2, :a2, :g2, :e2, :c2]
+# array starts at note 0
+a2 = 0
+
+# this is a function of the drums with the parameters of amp and time
+define :drums do |z, time|
+  sample :tabla_ghe2, amp: z
+  sleep time
+  sample :tabla_ghe4, amp: z
+  sleep time
+  sample :tabla_ghe2, amp: z
+  sleep time
+  sample :tabla_ghe4, amp: z
+  sleep time
+  sample :tabla_ghe1, amp: z
+  sleep time
+  sample :tabla_ghe2, amp: z
+  sleep time
+  sample :tabla_ghe4, amp: z
+  sleep time
+  sample :tabla_ghe2, amp: z
+  sleep time
+end
+
+# this is part of the intro
+sample :ambi_lunar_land
+
+#this is the build up of the intro with drums that speeds up every rotation
+# it uses the variable x to speed up the sleeps
+with_fx :lpf do
+  
+  x = 2
+  5.times do
+    sample :tabla_ghe2, amp: 5
+    sleep x
+    sample :tabla_ghe4, amp: 5
+    sleep x
+    sample :tabla_ghe2, amp: 5
+    sleep x
+    sample :tabla_ghe4, amp: 5
+    sleep x
+    sample :tabla_ghe1, amp: 5
+    sleep x
+    sample :tabla_ghe2, amp: 5
+    sleep x
+    sample :tabla_ghe4, amp: 5
+    sleep x
+    sample :tabla_ghe2, amp: 5
+    sleep x
+    x = x - 0.4
+  end
+  
+  sleep 4
+  
+  # this is the drums with the parameters of 1 on time and 1 on amp
+  live_loop :drums do
+    drums(1, 1)
+  end
+  
+  sleep 16
+  
+  # this is a live loop giving an african vibe adding onto the drums
+  live_loop :background_sound do
+    sample :loop_safari
+    sleep 2
+  end
+  live_loop :zzz do
+    sample :misc_cineboom, amp: 1.5
+    sleep 16
+  end
+  sleep 8
+  
+  use_synth :pretty_bell
+  
+  # this live loop is used as a background drum with a randomization on the amp
+  live_loop :african do
+    sample :loop_tabla, amp: rrand(2,3)
+    sleep 16
+  end
+  sleep 32
+  
+  # this gives more of an african vibe to me and uses the array at the top
+  live_loop :dum do
+    8.times do
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 =a2+1
+      play notes2[a2], amp: 4
+      sleep 1
+      a2 = 0
+    end
+  end
+end
+
