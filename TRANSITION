@@ -1,0 +1,8 @@
+  g=0
+  # I added another sample to the melody which will have a random sleep time to it
+  live_loop :cymbol do
+    sample :bass_trance_c, rate: rrand(0.4, 0.6), amp: g
+    sleep 1
+    g=g+2
+  end
+end
